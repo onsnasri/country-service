@@ -27,9 +27,10 @@ pipeline {
       stage('SonarQube Analysis')
       {
           steps{
-              withSonarQubeEnv(installationName: 'MySonarQubeServer', credentialId: 'sonar 
+              withSonarQubeEnv(installationName: 'MySonarQubeServer', credentialId: 'sonarqubePWD'
               sh "mvn sonar:sonar -Dsonar.projectkey=country-service -Dsonar.host.url=http://localhost:9000 -Dsonar.login=squ_f12e197fac8112f87b8960f2e36eb6690e082700            
 
+}
 }
 }
 }
