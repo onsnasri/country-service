@@ -24,8 +24,6 @@ public class Country {
 	public Country(int i, String string, String string2) {
 		// TODO Auto-generated constructor stub
 	}
-	public Country() {
-    }
 	public int getIdCountry() {
 		return idCountry;
 	}
