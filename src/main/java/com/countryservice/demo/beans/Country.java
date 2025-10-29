@@ -21,9 +21,7 @@ public class Country {
 	private String name;
 	@Column(name="capital_name")
 	private String Capital;
-	public Country(int i, String string, String string2) {
-		// TODO Auto-generated constructor stub
-	}
+	
 	public int getIdCountry() {
 		return idCountry;
 	}
