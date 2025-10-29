@@ -1,0 +1,36 @@
+pipeline {
+      agent any
+      tools {
+          maven 'mymaven'
+      }
+
+      stages {
+      stage('Checkout code')
+      {
+
+          steps {
+              git branch: 'master', url: 'https://github.com/onsnasri/country-service.git'
+          }
+      }
+      stage('Compile, test code, package in war file and store it in maven repo')
+      {
+          steps {
+              sh 'mvn clean install'
+          }
+
+          post{
+              success {
+                 junit allowEmptyResults: true, testResults: '.** /target/sunfire-reports/*.xml'
+              }
+          }
+       }
+      stage('SonarQube Analysis')
+      {
+          steps{
+              withSonarQubeEnv(installationName: 'MySonarQubeServer', credentialId: 'sonar 
+              sh "mvn sonar:sonar -Dsonar.projectkey=country-service -Dsonar.host.url=http://localhost:9000 -Dsonar.login=squ_f12e197fac8112f87b8960f2e36eb6690e082700            
+
+}
+}
+}
+}
