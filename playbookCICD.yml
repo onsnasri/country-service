@@ -5,7 +5,7 @@
 
   vars:
     image_name: my-country-service
-    image_tag: v1
+    image_tag: v8
     dockerfile_path: './'
     docker_registry_username: onsnas
     docker_registry_password: onsDocker?870. 
@@ -21,14 +21,14 @@
       community.docker.docker_image:
         build:
           path: "{{ dockerfile_path }}"
-        name: "{{ docker_registry_username }}/{{ image_name }}"
+        name: "{{ docker_registry_username }}/{{ image_name }}:{{image_tag}}"
         tag: "{{ image_tag }}"
         source: build
         state: present
 
     - name: Push the Docker image to Docker Hub
       community.docker.docker_image:
-        name: "{{ docker_registry_username }}/{{ image_name }}"
+        name: "{{ docker_registry_username }}/{{ image_name }}:{{image_tag}}"
         tag: "{{ image_tag }}"
         push: yes
         source: local
