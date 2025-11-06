@@ -5,7 +5,7 @@
 
   vars:
     image_name: my-country-service
-    image_tag: v8
+    image_tag: 8
     dockerfile_path: './'
     docker_registry_username: onsnas
     docker_registry_password: onsDocker?870. 
