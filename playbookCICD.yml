@@ -1,4 +1,4 @@
-µ---
+---
 - name: Build and Deploy Docker Image to Kubernetes
   hosts: localhost
   connection: local
