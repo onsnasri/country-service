@@ -18,7 +18,7 @@
         reauthorize: yes
 
     - name: Build Docker image
-      cdocker_image:
+      docker_image:
         build:
           path: "{{ dockerfile_path }}"
         name: "{{ docker_registry_username }}/{{ image_name }}:{{image_tag}}"
