@@ -40,7 +40,7 @@
 
     - name: Replace image tag in deployment
       ansible.builtin.replace:
-        path: "{{ playbook_dir }}/my-deployment.yaml"
+        path: "{{ playbook_dir }}/deployment.yml"
         regexp: 'TAG_TO_REPLACE'
         replace: "{{ image_tag }}"
 
@@ -48,7 +48,7 @@
       kubernetes.core.k8s:
         state: present
         namespace: jenkins
-        src: "{{ playbook_dir }}/my-deployment.yaml"
+        src: "{{ playbook_dir }}/deployment.yml"
         kubeconfig: "{{ playbook_dir }}/config"
 
     - name: Apply Kubernetes Service
