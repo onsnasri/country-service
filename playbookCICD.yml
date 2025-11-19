@@ -5,27 +5,24 @@
 
   vars:
     image_name: my-country-service
-    image_tag: "15"   # tu peux automatiser l'incrément si tu veux
+    image_tag: "15"
     dockerfile_path: './'
     docker_registry_username: onsnas
     docker_registry_password: "onsDocker?870."
     deployment_file: "my-deployment.yml"
 
   tasks:
-    - name: Log in to Docker Hub
-      community.general.docker_login:
-        username: "{{ docker_registry_username }}"
-        password: "{{ docker_registry_password }}"
-        reauthorize: yes
+    - name: Build Docker image
+      ansible.builtin.shell: |
+        docker build -t {{ docker_registry_username }}/{{ image_name }}:{{ image_tag }} {{ dockerfile_path }}
 
-    - name: Build and push Docker image
-      community.docker.docker_image:
-        build:
-          path: "{{ dockerfile_path }}"
-        name: "{{ docker_registry_username }}/{{ image_name }}"
-        tag: "{{ image_tag }}"
-        push: yes
-        source: build
+    - name: Log in to Docker Hub
+      ansible.builtin.shell: |
+        echo "{{ docker_registry_password }}" | docker login -u "{{ docker_registry_username }}" --password-stdin
+
+    - name: Push Docker image
+      ansible.builtin.shell: |
+        docker push {{ docker_registry_username }}/{{ image_name }}:{{ image_tag }}
 
     - name: Update deployment YAML with correct image tag
       ansible.builtin.replace:
